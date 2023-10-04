@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  ci:
+    uses: gifnksm/rust-template/.github/workflows/reusable-ci.yml@main
+
+  ci-complete:
+    needs: ci
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - run: |
+          if ${{ needs.ci.result == 'success' }}; then
+            echo "CI succeeded"
+            exit 0
+          else
+            echo "CI failed"
+            exit 1
+          fi

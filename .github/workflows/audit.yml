@@ -1,0 +1,31 @@
+name: Security Audit
+
+on:
+  schedule:
+    # Runs at 00:00 UTC everyday
+    - cron: "0 0 * * *"
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  audit:
+    uses: gifnksm/rust-template/.github/workflows/reusable-audit.yml@main
+    permissions:
+      issues: write
+
+  audit-complete:
+    needs: audit
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - run: |
+          if ${{ needs.audit.result == 'success' }}; then
+            echo "Audit succeeded"
+            exit 0
+          else
+            echo "Audit failed"
+            exit 1
+          fi
