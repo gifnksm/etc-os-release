@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+## [0.1.0] - 2023-10-04
+
 * First release
 
 <!-- next-url -->
-[Unreleased]: https://github.com/gifnksm/etc-os-release/commits/HEAD
+[Unreleased]: https://github.com/gifnksm/etc-os-release/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/gifnksm/etc-os-release/commits/v0.1.0
