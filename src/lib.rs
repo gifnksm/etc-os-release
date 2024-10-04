@@ -16,7 +16,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! etc-os-release = "0.1.0"
+//! etc-os-release = "0.1.1"
 //! ```
 //!
 //! # Examples
@@ -66,7 +66,7 @@
 //! assert_eq!(os_release.version_id(), Some("32"));
 //! ```
 
-#![doc(html_root_url = "https://docs.rs/etc-os-release/0.1.0")]
+#![doc(html_root_url = "https://docs.rs/etc-os-release/0.1.1")]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![warn(missing_docs, unreachable_pub)]
 

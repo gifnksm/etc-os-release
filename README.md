@@ -28,7 +28,7 @@ Add this to your `Cargo.toml`:
 
 ````toml
 [dependencies]
-etc-os-release = "0.1.0"
+etc-os-release = "0.1.1"
 ````
 
 ## Examples
