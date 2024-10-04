@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+### Fixed
+
+* Fix broken links in crate documentation
+
 ## [0.1.0] - 2023-10-04
 
 * First release

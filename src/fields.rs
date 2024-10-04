@@ -317,7 +317,7 @@ impl OsRelease {
 
     /// Returns the name of the OS vendor.
     ///
-    /// For more information, see the [`VENDOR=`] section of [`os-release(5)`]
+    /// For more information, see the [`VENDOR_NAME=`] section of [`os-release(5)`]
     ///
     /// [`VENDOR_NAME=`]: https://www.freedesktop.org/software/systemd/man/os-release.html#VENDOR_NAME=
     /// [`os-release(5)`]: https://www.freedesktop.org/software/systemd/man/os-release.html
@@ -390,7 +390,7 @@ impl OsRelease {
     ///
     /// For more information, see the [`SYSEXT_SCOPE=`] section of [`os-release(5)`]
     ///
-    /// [`SYSEXT_LEVEL=`]: https://www.freedesktop.org/software/systemd/man/os-release.html#SYSEXT_LEVEL=
+    /// [`SYSEXT_SCOPE=`]: https://www.freedesktop.org/software/systemd/man/os-release.html#SYSEXT_SCOPE=
     /// [`os-release(5)`]: https://www.freedesktop.org/software/systemd/man/os-release.html
     pub fn sysext_scope(&self) -> Option<impl Iterator<Item = &str>> {
         self.get_value_as_list("SYSEXT_SCOPE")
@@ -400,7 +400,7 @@ impl OsRelease {
     ///
     /// For more information, see the [`CONFEXT_SCOPE=`] section of [`os-release(5)`]
     ///
-    /// [`CONFEXT_LEVEL=`]: https://www.freedesktop.org/software/systemd/man/os-release.html#CONFEXT_LEVEL=
+    /// [`CONFEXT_SCOPE=`]: https://www.freedesktop.org/software/systemd/man/os-release.html#CONFEXT_SCOPE=
     /// [`os-release(5)`]: https://www.freedesktop.org/software/systemd/man/os-release.html
     pub fn confext_scope(&self) -> Option<impl Iterator<Item = &str>> {
         self.get_value_as_list("CONFEXT_SCOPE")
