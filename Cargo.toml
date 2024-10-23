@@ -38,7 +38,7 @@ url = ["dep:url"]
 [dependencies]
 chrono = { version = "0.4.38", default-features = false, optional = true }
 indexmap = "2.6.0"
-thiserror = "1.0.64"
+thiserror = "1.0.65"
 url = { version = "2.5.2", default-features = false, optional = true }
 
 [dev-dependencies]
