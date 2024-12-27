@@ -8,5 +8,5 @@ readme = "README.md"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cli-xtask = { version = "0.9", features = ["lib-crate", "lib-crate-extra", "main"] }
+cli-xtask = { version = "0.10", features = ["lib-crate", "lib-crate-extra", "main"] }
 
