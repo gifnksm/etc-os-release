@@ -36,7 +36,7 @@ date = ["dep:chrono"]
 url = ["dep:url"]
 
 [dependencies]
-chrono = { version = "0.4.39", default-features = false, optional = true }
+chrono = { version = "0.4.40", default-features = false, optional = true }
 indexmap = "2.7.1"
 thiserror = "2.0.11"
 url = { version = "2.5.2", default-features = false, optional = true }
