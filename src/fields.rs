@@ -8,7 +8,7 @@ use crate::{OsRelease, OsReleaseEntry};
 /// Methods to get any field in the os-release file.
 impl OsRelease {
     /// Returns the iterator over the fields in the os-release file.
-    pub fn entries(&self) -> impl Iterator<Item = OsReleaseEntry> {
+    pub fn entries(&'_ self) -> impl Iterator<Item = OsReleaseEntry<'_>> {
         self.fields.iter().map(|(k, v)| OsReleaseEntry::new(k, v))
     }
 
