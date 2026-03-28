@@ -13,24 +13,37 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.ref_name != github.event.repository.default_branch }}
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
-  cd:
-    uses: gifnksm/rust-template/.github/workflows/reusable-cd.yml@main
-    with:
-      upload-dist-archive: false
+  release:
+    name: Release
+    runs-on: ubuntu-latest
     permissions:
       contents: write
+    steps:
+      - name: Releasing assets
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
 
   cd-complete:
-    needs: cd
+    needs:
+      - release
     runs-on: ubuntu-latest
     if: ${{ always() }}
+    permissions: {}
     steps:
-      - run: |
-          if ${{ needs.cd.result == 'success' }}; then
+      - name: CD complete
+        run: |
+          if ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}; then
             echo "CD succeeded"
-            exit 0
           else
             echo "CD failed"
             exit 1
           fi
+        shell: bash
