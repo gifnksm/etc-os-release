@@ -44,6 +44,8 @@ println!("{}-{}", os_release.id(), os_release.version_id().unwrap_or_default());
 
 Parse a string containing the contents of the os-release file:
 
+[`os-release(5)`]: https://www.freedesktop.org/software/systemd/man/os-release.html
+
 ````rust
 use std::str::FromStr;
 
@@ -74,8 +76,6 @@ VARIANT_ID=workstation
 assert_eq!(os_release.id(), "fedora");
 assert_eq!(os_release.version_id(), Some("32"));
 ````
-
-[`os-release(5)`]: https://www.freedesktop.org/software/systemd/man/os-release.html
 <!-- cargo-sync-rdme ]] -->
 
 ## Minimum supported Rust version (MSRV)
