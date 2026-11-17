@@ -6,7 +6,7 @@ use std::{
     str::FromStr,
 };
 
-use crate::{entry::OsReleaseLine, OsRelease, OsReleaseEntry};
+use crate::{OsRelease, OsReleaseEntry, entry::OsReleaseLine};
 
 /// Errors that can occur while parsing the os-release file.
 #[derive(Debug, thiserror::Error)]
@@ -37,11 +37,16 @@ pub enum Error {
 impl OsRelease {
     /// Open the os-release file and parse it.
     ///
-    /// If `/etc/os-release` exists, it is opened.
-    /// Otherwise, `/usr/lib/os-release` is opened.
-    /// If neither file exists, an error is returned.
+    /// If `/etc/os-release` exists, it is opened. Otherwise, `/usr/lib/os-release` is
+    /// opened. If neither file exists, an error is returned.
     ///
     /// For simplicity, this function assumes that the file is well-formed.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`Error::NoOsRelease`] if neither file exists, [`Error::Open`] if the
+    /// selected file cannot be opened, or [`Error::Read`] if reading it fails
+    /// (including invalid UTF-8).
     pub fn open() -> Result<Self, Error> {
         let path = os_release_path().ok_or(Error::NoOsRelease)?;
         let file = File::open(path).map_err(|err| Error::Open {
@@ -54,6 +59,11 @@ impl OsRelease {
     /// Parse the os-release file from a reader.
     ///
     /// For simplicity, this function assumes that the file is well-formed.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`Error::Read`] if reading from the reader fails, including when the
+    /// input contains invalid UTF-8.
     pub fn from_reader(reader: impl io::Read) -> Result<Self, Error> {
         let reader = BufReader::new(reader);
         reader
@@ -86,7 +96,7 @@ impl<'a> FromIterator<&'a str> for OsRelease {
             .filter_map(|line| {
                 OsReleaseLine::from_str(line)
                     .ok()
-                    .and_then(|line| line.into_entry())
+                    .and_then(super::entry::OsReleaseLine::into_entry)
             })
             .collect()
     }
@@ -101,7 +111,7 @@ impl FromIterator<String> for OsRelease {
             .filter_map(|line| {
                 OsReleaseLine::from_str(&line)
                     .ok()
-                    .and_then(|line| line.into_entry())
+                    .and_then(OsReleaseLine::into_entry)
             })
             .collect()
     }

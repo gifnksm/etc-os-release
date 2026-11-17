@@ -1,23 +1,14 @@
 //! A parser and data structures for the `/etc/os-release` file.
 //!
-//! os-release file is used by systemd and other tools to store information about the
-//! operating system distribution.
+//! os-release file is used by systemd and other tools to store information about
+//! the operating system distribution.
 //!
-//! The file is formatted as a list of environment-like shell-compatible
-//! variable assignments.
+//! The file is formatted as a list of environment-like shell-compatible variable
+//! assignments.
 //!
 //! For more information, see [`os-release(5)`]
 //!
 //! [`os-release(5)`]: https://www.freedesktop.org/software/systemd/man/os-release.html
-//!
-//! # Usage
-//!
-//! Add this to your `Cargo.toml`:
-//!
-//! ```toml
-//! [dependencies]
-//! etc-os-release = "0.1.1"
-//! ```
 //!
 //! # Examples
 //!
@@ -66,7 +57,6 @@
 //! assert_eq!(os_release.version_id(), Some("32"));
 //! ```
 
-#![doc(html_root_url = "https://docs.rs/etc-os-release/0.1.1")]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![warn(missing_docs, unreachable_pub)]
 
@@ -91,13 +81,16 @@ mod fields;
 ///
 /// # Notes
 ///
-/// If you are using this crate to determine the OS or a specific version of it, use the [`Self::id()`]
-/// and [`Self::version_id()`] methods, possibly with [`Self::id_like()`] as fallback for [`Self::id()`].
-/// When looking for an OS identification string for presentation to the user, use the [`Self::pretty_name()`] method.
+/// If you are using this crate to determine the OS or a specific version of it, use
+/// the [`Self::id()`] and [`Self::version_id()`] methods, possibly with
+/// [`Self::id_like()`] as fallback for [`Self::id()`]. When looking for an OS
+/// identification string for presentation to the user, use the
+/// [`Self::pretty_name()`] method.
 ///
-/// Note that operating system vendors may choose not to provide version information, for example to accommodate for rolling releases.
-/// In this case, [`Self::version()`] and [`Self::version_id()`] may be `None`.
-/// Application should not rely on these fields to be set.
+/// Note that operating system vendors may choose not to provide version
+/// information, for example to accommodate for rolling releases. In this case,
+/// [`Self::version()`] and [`Self::version_id()`] may be `None`. Application should
+/// not rely on these fields to be set.
 ///
 /// # Examples
 ///

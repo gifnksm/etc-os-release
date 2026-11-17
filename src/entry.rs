@@ -20,11 +20,13 @@ impl<'a> OsReleaseEntry<'a> {
     }
 
     /// Returns the key of the entry.
+    #[must_use]
     pub fn key(&self) -> &str {
         &self.key
     }
 
     /// Returns the value of the entry.
+    #[must_use]
     pub fn value(&self) -> &str {
         &self.value
     }
@@ -35,6 +37,10 @@ impl<'a> OsReleaseEntry<'a> {
     }
 
     /// Returns the value of the entry as a URL.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error if the value cannot be parsed as a URL.
     #[cfg(feature = "url")]
     #[cfg_attr(docsrs, doc(cfg(feature = "url")))]
     pub fn value_as_url(&self) -> Result<url::Url, url::ParseError> {
@@ -42,6 +48,11 @@ impl<'a> OsReleaseEntry<'a> {
     }
 
     /// Returns the value of the entry as a date.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error if the value cannot be parsed as a valid date using the
+    /// `%Y-%m-%d` format.
     #[cfg(feature = "date")]
     #[cfg_attr(docsrs, doc(cfg(feature = "date")))]
     pub fn value_as_date(&self) -> Result<jiff::civil::Date, jiff::Error> {
@@ -60,6 +71,7 @@ pub enum OsReleaseLine<'a> {
 
 impl<'a> OsReleaseLine<'a> {
     /// Returns the [`OsReleaseEntry`], if any.
+    #[must_use]
     pub fn into_entry(self) -> Option<OsReleaseEntry<'a>> {
         match self {
             Self::Empty => None,
@@ -78,8 +90,8 @@ impl FromStr for OsReleaseLine<'static> {
 
 /// Parse a line from the os-release file.
 ///
-/// Returns `None` if the line is empty or a comment.
-/// Otherwise, returns the key and value.
+/// Returns `None` if the line is empty or a comment. Otherwise, returns the key and
+/// value.
 ///
 /// For simplicity, this function assumes that the file is well-formed.
 fn parse_line(line: &str) -> Option<OsReleaseEntry<'static>> {
