@@ -1,5 +1,3 @@
-#[cfg(feature = "date")]
-use chrono::NaiveDate;
 #[cfg(feature = "url")]
 use url::Url;
 
@@ -32,9 +30,9 @@ impl OsRelease {
     /// Returns the value of a field in the os-release as a date.
     #[cfg(feature = "date")]
     #[cfg_attr(docsrs, doc(cfg(feature = "date")))]
-    pub fn get_value_as_date(&self, key: &str) -> Result<Option<NaiveDate>, chrono::ParseError> {
+    pub fn get_value_as_date(&self, key: &str) -> Result<Option<jiff::civil::Date>, jiff::Error> {
         self.get_value(key)
-            .map(|date| NaiveDate::parse_from_str(date, "%Y-%m-%d"))
+            .map(|date| jiff::civil::Date::strptime("%Y-%m-%d", date))
             .transpose()
     }
 }
@@ -290,7 +288,7 @@ impl OsRelease {
     /// [`os-release(5)`]: https://www.freedesktop.org/software/systemd/man/os-release.html
     #[cfg(feature = "date")]
     #[cfg_attr(docsrs, doc(cfg(feature = "date")))]
-    pub fn support_end(&self) -> Result<Option<NaiveDate>, chrono::ParseError> {
+    pub fn support_end(&self) -> Result<Option<jiff::civil::Date>, jiff::Error> {
         self.get_value_as_date("SUPPORT_END")
     }
 

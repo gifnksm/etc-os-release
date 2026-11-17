@@ -29,8 +29,8 @@ github-actions = { workflows = "ci.yml" }
 codecov = true
 
 [dependencies]
-chrono = { version = "0.4.45", default-features = false, optional = true }
 indexmap = "2.14.2"
+jiff = { version = "0.2.43", default-features = false, features = ["std"], optional = true }
 thiserror = "2.0.21"
 url = { version = "2.5.8", default-features = false, optional = true }
 
@@ -39,5 +39,5 @@ maintenance = { status = "passively-maintained" }
 
 [features]
 default = []
-date = ["dep:chrono"]
+date = ["dep:jiff"]
 url = ["dep:url"]

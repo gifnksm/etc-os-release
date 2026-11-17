@@ -1,10 +1,5 @@
 use std::{borrow::Cow, convert::Infallible, str::FromStr};
 
-#[cfg(feature = "date")]
-use chrono::NaiveDate;
-#[cfg(feature = "url")]
-use url::Url;
-
 /// An entry in the os-release file.
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct OsReleaseEntry<'a> {
@@ -42,15 +37,15 @@ impl<'a> OsReleaseEntry<'a> {
     /// Returns the value of the entry as a URL.
     #[cfg(feature = "url")]
     #[cfg_attr(docsrs, doc(cfg(feature = "url")))]
-    pub fn value_as_url(&self) -> Result<Url, url::ParseError> {
-        Url::parse(&self.value)
+    pub fn value_as_url(&self) -> Result<url::Url, url::ParseError> {
+        url::Url::parse(&self.value)
     }
 
     /// Returns the value of the entry as a date.
     #[cfg(feature = "date")]
     #[cfg_attr(docsrs, doc(cfg(feature = "date")))]
-    pub fn value_as_date(&self) -> Result<NaiveDate, chrono::ParseError> {
-        NaiveDate::parse_from_str(&self.value, "%Y-%m-%d")
+    pub fn value_as_date(&self) -> Result<jiff::civil::Date, jiff::Error> {
+        jiff::civil::Date::strptime("%Y-%m-%d", self.value.as_ref())
     }
 }
 
