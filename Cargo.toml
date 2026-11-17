@@ -1,38 +1,43 @@
 [package]
 name = "etc-os-release"
 version = "0.1.1"
-edition = "2021"
-rust-version = "1.88.0"
+edition = "2024"
+rust-version = "1.94.0"
 description = "Parse /etc/os-release file"
 repository = "https://github.com/gifnksm/etc-os-release"
 license = "MIT OR Apache-2.0"
 keywords = []
 categories = []
 
-[package.metadata.docs.rs]
-all-features = true
-rustdoc-args = ["--cfg", "docsrs"]
+[package.metadata.cargo-sync-rdme.badge]
+style = "flat-square"
+badges = {
+  maintenance = true,
+  license = { link = "#license" },
+  crates-io = true,
+  docs-rs = true,
+  rust-version = true,
+  github-actions = { workflows = "ci.yml" },
+  codecov = true,
+}
 
 [package.metadata.cargo-sync-rdme.rustdoc]
 toolchain = "nightly"
+# `mise run ci` runs sync-rdme and `cargo doc` / `cargo docs-rs` tasks in parallel.
+# sync-rdme reads rustdoc JSON after Cargo exits and releases its lock. Another
+# task may clear target/doc before that read, so store the JSON separately.
+# Share intermediate build artifacts through the usual target directory.
+cargo-args = [
+  "--config",
+  'build.target-dir="target/cargo-sync-rdme"',
+  "--config",
+  'build.build-dir="target"',
+]
 
-[package.metadata.cargo-sync-rdme.badge]
-style = "flat-square"
-
-[package.metadata.cargo-sync-rdme.badge.badges]
-maintenance = true
-license = { link = "#license" }
-crates-io = true
-docs-rs = true
-rust-version = true
-github-actions = { workflows = "ci.yml" }
-codecov = true
-
-[dependencies]
-indexmap = "2.14.2"
-jiff = { version = "0.2.43", default-features = false, features = ["std"], optional = true }
-thiserror = "2.0.21"
-url = { version = "2.5.8", default-features = false, optional = true }
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
 
 [badges]
 maintenance = { status = "passively-maintained" }
@@ -41,3 +46,27 @@ maintenance = { status = "passively-maintained" }
 default = []
 date = ["dep:jiff"]
 url = ["dep:url"]
+
+[dependencies]
+indexmap = "2.14.2"
+jiff = { version = "0.2.43", default-features = false, features = ["std"], optional = true }
+thiserror = "2.0.21"
+url = { version = "2.5.8", default-features = false, optional = true }
+
+[lints.cargo]
+pedantic = { level = "warn", priority = -1 }
+
+# Restriction group
+non_kebab_case_features = "warn"
+non_kebab_case_packages = "warn"
+
+[lints.clippy]
+cargo = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+
+# Cargo group
+cargo_common_metadata = "allow"  # TODO: Before publishing, set package.keywords and package.categories, then remove this override.
+
+[profile.dev]
+# for faster development iterations
+debug = "line-tables-only"

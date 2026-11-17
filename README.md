@@ -1,12 +1,14 @@
+<!-- rumdl-disable MD063 -->
 <!-- cargo-sync-rdme title [[ -->
 # etc-os-release
 <!-- cargo-sync-rdme ]] -->
+<!-- rumdl-enable MD063 -->
 <!-- cargo-sync-rdme badge [[ -->
 [![Maintenance: passively-maintained](https://img.shields.io/badge/maintenance-passively--maintained-yellowgreen.svg?style=flat-square)](https://doc.rust-lang.org/cargo/reference/manifest.html#the-badges-section)
 [![License: MIT OR Apache-2.0](https://img.shields.io/crates/l/etc-os-release.svg?style=flat-square)](#license)
 [![crates.io](https://img.shields.io/crates/v/etc-os-release.svg?logo=rust&style=flat-square)](https://crates.io/crates/etc-os-release)
 [![docs.rs](https://img.shields.io/docsrs/etc-os-release.svg?logo=docs.rs&style=flat-square)](https://docs.rs/etc-os-release)
-[![Rust: ^1.88.0](https://img.shields.io/badge/rust-^1.88.0-93450a.svg?logo=rust&style=flat-square)](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)
+[![Rust: ^1.94.0](https://img.shields.io/badge/rust-^1.94.0-93450a.svg?logo=rust&style=flat-square)](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)
 [![GitHub Actions: CI](https://img.shields.io/github/actions/workflow/status/gifnksm/etc-os-release/ci.yml.svg?label=CI&logo=github&style=flat-square)](https://github.com/gifnksm/etc-os-release/actions/workflows/ci.yml)
 [![Codecov](https://img.shields.io/codecov/c/github/gifnksm/etc-os-release.svg?label=codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/gifnksm/etc-os-release)
 <!-- cargo-sync-rdme ]] -->
@@ -14,22 +16,13 @@
 <!-- cargo-sync-rdme rustdoc [[ -->
 A parser and data structures for the `/etc/os-release` file.
 
-os-release file is used by systemd and other tools to store information about the
-operating system distribution.
+os-release file is used by systemd and other tools to store information about
+the operating system distribution.
 
-The file is formatted as a list of environment-like shell-compatible
-variable assignments.
+The file is formatted as a list of environment-like shell-compatible variable
+assignments.
 
 For more information, see [`os-release(5)`]
-
-## Usage
-
-Add this to your `Cargo.toml`:
-
-````toml
-[dependencies]
-etc-os-release = "0.1.1"
-````
 
 ## Examples
 
@@ -78,24 +71,26 @@ assert_eq!(os_release.version_id(), Some("32"));
 ````
 <!-- cargo-sync-rdme ]] -->
 
-## Minimum supported Rust version (MSRV)
+## Minimum Supported Rust Version (MSRV)
 
-The minimum supported Rust version is **Rust 1.88.0**.
-At least the last 3 versions of stable Rust are supported at any given time.
+The minimum supported Rust version is **Rust 1.94.0**.
 
-While a crate is a pre-release status (0.x.x) it may have its MSRV bumped in a patch release.
-Once a crate has reached 1.x, any MSRV bump will be accompanied by a new minor version.
+While a crate is a pre-release status (0.x.x) it may have its MSRV bumped in a
+patch release. Once a crate has reached 1.x, any MSRV bump will be accompanied
+by a new minor version.
 
 ## License
 
 This project is licensed under either of
 
-* Apache License, Version 2.0
-  ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
-* MIT license
-  ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
+* Apache License, Version 2.0 ([LICENSE-APACHE] or
+  <http://www.apache.org/licenses/LICENSE-2.0>)
+* MIT license ([LICENSE-MIT] or <http://opensource.org/licenses/MIT>)
 
 at your option.
+
+[LICENSE-APACHE]: LICENSE-APACHE
+[LICENSE-MIT]: LICENSE-MIT
 
 ## Contribution
 
@@ -103,4 +98,6 @@ Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING.md].
+
+[CONTRIBUTING.md]: CONTRIBUTING.md
