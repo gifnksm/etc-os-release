@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased] - ReleaseDate
 
+## [0.2.0] - 2026-11-17
+
 ### Changed
 
 * **Breaking:** Replace [`chrono`] with [`jiff`] for the `date` feature because
@@ -41,6 +43,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 * First release
 
 <!-- next-url -->
-[Unreleased]: https://github.com/gifnksm/etc-os-release/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/gifnksm/etc-os-release/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/gifnksm/etc-os-release/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/gifnksm/etc-os-release/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/gifnksm/etc-os-release/commits/v0.1.0
